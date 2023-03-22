@@ -5,10 +5,10 @@ public class CuentaCorriente extends Cuenta {
     }
 
     @Override //es para sobreescribir
-    public boolean retirar(double valor) {
+    public void retirar(double valor) throws SaldoInsuficienteException{
         // TODO Auto-generated method stub
         double comision = 0.2;
-        return super.retirar(valor + comision);
+        super.retirar(valor + comision);
     }
 
     @Override

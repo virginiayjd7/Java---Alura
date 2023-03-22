@@ -34,21 +34,25 @@ public abstract class Cuenta{
        //this.saldo =  this.saldo + valor;
     //}
     // metodo que SI retorna valor
-    public boolean retirar(double valor ){
+    public void retirar(double valor ) throws SaldoInsuficienteException{
 
-        if (this.saldo >= valor){
-            this.saldo -=  valor;
-            return true;
-        }else{
-            return false;
+        if(this.saldo < valor){
+            throw new SaldoInsuficienteException("no tiene saldo");
         }
+            this.saldo -=  valor;
+           
         //return false;
     }
 
     public boolean trasferir(double valor, Cuenta cuenta){
 
         if(this.saldo >= valor){
-            this.retirar(valor); //-= valor;
+            try {
+                this.retirar(valor);
+            } catch (SaldoInsuficienteException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } //-= valor;
             //this.saldo = this.saldo - valor;
             //cuenta.depositar(valor);
             cuenta.depositar(valor);
